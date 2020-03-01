@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import './Person/Person.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -14,13 +15,9 @@ class App extends Component {
   }
 
   nameChangedHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(p => {
-      return p.id === id;
-    })
+    const personIndex = this.state.persons.findIndex(p => { return p.id === id; })
 
-    const person = {
-      ...this.state.persons[personIndex]
-    }
+    const person = { ...this.state.persons[personIndex] }
 
     // const person = Object.assign({}, this.state.persons[personIndex]); create new object old way
 
@@ -46,10 +43,24 @@ class App extends Component {
     this.setState({ showPersons: !doesShow })
   }
   render() {
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      padding: '10px',
+      outline: 'none',
+      border: '1px solid green',
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'darkgreen',
+        color: 'purple'
+      }
+    }
+
+
     let persons = null;
     if (this.state.showPersons) {
-      persons = (
 
+      persons = (
         <div className="Person-container">
           {
             this.state.persons.map((person, index) => {
@@ -64,16 +75,37 @@ class App extends Component {
           }
         </div>
       );
+
+      style.backgroundColor = 'red';
+      style.border = '1px solid red';
+      style[':hover'] = {
+        backgroundColor: 'yellow',
+        color: 'black'
+      }
     }
+
+    let cssClasses = [];
+
+    if (this.state.persons.length <= 2) {
+      cssClasses.push('red');
+    }
+
+    if (this.state.persons.length <= 1) {
+      cssClasses.push('bold');
+    }
+
 
     return (
       <div className="App">
         <h1>Test</h1>
-        <button onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        <p className={cssClasses.join(' ')}>This is really working!</p>
+        <button
+          style={style}
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {persons}
       </div>
     )
   }
 }
 
-export default App;
+export default Radium(App);
