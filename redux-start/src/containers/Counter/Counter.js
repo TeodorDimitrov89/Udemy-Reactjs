@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
-
+import * as actionTypes from '../../store/actions';
 class Counter extends Component {
     state = {
         counter: 0
@@ -31,8 +31,16 @@ class Counter extends Component {
                 <CounterOutput value={this.props.ctr} />
                 <CounterControl label="Increment" clicked={this.props.onIncrementCount} />
                 <CounterControl label="Decrement" clicked={this.props.onDecrementCount} />
-                <CounterControl label="Add 5" clicked={this.props.onAddCount} />
-                <CounterControl label="Subtract 5" clicked={this.props.onSubtractCount} />
+                <CounterControl label="Add 50" clicked={this.props.onAddCount} />
+                <CounterControl label="Subtract 150" clicked={this.props.onSubtractCount} />
+                <hr />
+                <button onClick={this.props.onStoreResult}>Store Result: {}</button>
+                <ul>
+                    {this.props.storeResult.map(strResult => (
+                        <li key={strResult.id} onClick={() => { this.props.onDeleteResult(strResult.id) }}>{strResult.value}</li>
+                    ))}
+
+                </ul>
             </div>
         );
     }
@@ -41,16 +49,19 @@ class Counter extends Component {
 
 const mapStateToProps = state => {
     return {
-        ctr: state.counter
+        ctr: state.counter,
+        storeResult: state.result
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onIncrementCount: () => dispatch({ type: 'INCREMENT' }),
-        onDecrementCount: () => { dispatch({ type: 'DECREMENT' }) },
-        onAddCount: () => { dispatch({ type: 'ADD', payload: 5 }) },
-        onSubtractCount: () => { dispatch({ type: 'SUBTRACT', payload: 5 }) }
+        onIncrementCount: () => dispatch({ type: actionTypes.INCREMENT }),
+        onDecrementCount: () => { dispatch({ type: actionTypes.DECREMENT }) },
+        onAddCount: () => { dispatch({ type: actionTypes.ADD, value: 50 }) },
+        onSubtractCount: () => { dispatch({ type: actionTypes.SUBTRACT, value: 150 }) },
+        onStoreResult: () => { dispatch({ type: actionTypes.STORE_RESULT }) },
+        onDeleteResult: (id) => { dispatch({ type: actionTypes.DELETE_RESULT, id: id }) }
     };
 };
 
