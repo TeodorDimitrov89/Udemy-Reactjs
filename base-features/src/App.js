@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './App.css';
-import person from './Person/Person';
-
+// import Radium from 'radium';
 import Person from './Person/Person';
+
+
+
 
 class App extends Component {
   state = {
@@ -42,12 +44,9 @@ class App extends Component {
   }
 
   nameChangeHandler = (event, id) => {
-    const personIndex = this
-      .state
-      .persons
-      .findIndex(p => {
-        return p.id === id;
-      });
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
 
     const person = {
       ...this.state.persons[personIndex]
@@ -79,12 +78,19 @@ class App extends Component {
   render() {
     const buttonStyle = {
       backgroundColor: 'white',
+      color: '#ccc',
       border: '1px solid lightblue',
-      borderRadius: '12px',
+      borderRadius: '10px',
       padding: '12px',
       fontSize: '16px',
       width: '140px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      transition: 'all .3s ease',
+      // ':hover': {
+      //   backgroundColor: 'lightgreen',
+      //   color: 'black',
+      //   transition: 'all .3s ease'
+      // }
     }
 
     let persons = null;
@@ -92,10 +98,7 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this
-            .state
-            .persons
-            .map((person, index) => {
+          {this.state.persons.map((person, index) => {
               return (<Person
                 name={person.name}
                 age={person.age}
@@ -121,4 +124,5 @@ class App extends Component {
   }
 }
 
+// export default Radium(App);
 export default App;
