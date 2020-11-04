@@ -1,9 +1,27 @@
 import React, {Component} from 'react';
 import './App.css';
 // import Radium from 'radium';
+import styled from 'styled-components';
+
 import Person from './Person/Person';
 
 
+const StyledButton = styled.button`
+    background-color: ${props => props.myAlt ? 'red': 'white'};
+    color: #ccc;
+    border: 1px solid lightblue;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    width: 140px;
+    cursor: pointer;
+    transition: all .3s ease;
+    &:hover{
+      background-color: lightgreen;
+      color: black;
+      transition: all .3s ease;
+    }
+`;
 
 
 class App extends Component {
@@ -76,22 +94,22 @@ class App extends Component {
   }
 
   render() {
-    const buttonStyle = {
-      backgroundColor: 'white',
-      color: '#ccc',
-      border: '1px solid lightblue',
-      borderRadius: '10px',
-      padding: '12px',
-      fontSize: '16px',
-      width: '140px',
-      cursor: 'pointer',
-      transition: 'all .3s ease',
-      // ':hover': {
-      //   backgroundColor: 'lightgreen',
-      //   color: 'black',
-      //   transition: 'all .3s ease'
-      // }
-    }
+    // const buttonStyle = {
+    //   backgroundColor: 'white',
+    //   color: '#ccc',
+    //   border: '1px solid lightblue',
+    //   borderRadius: '10px',
+    //   padding: '12px',
+    //   fontSize: '16px',
+    //   width: '140px',
+    //   cursor: 'pointer',
+    //   transition: 'all .3s ease',
+    //   ':hover': {
+    //     backgroundColor: 'lightgreen',
+    //     color: 'black',
+    //     transition: 'all .3s ease'
+    //   }
+    // }
 
     let persons = null;
 
@@ -115,7 +133,15 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Welcome to React</h1>
-        <button style={buttonStyle} onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        {/* <button 
+          style={buttonStyle}
+          onClick={this.togglePersonsHandler}>Toggle Persons
+        </button> */}
+        <StyledButton 
+          onClick={this.togglePersonsHandler}
+          myAlt={this.state.showPersons}>Toggle Persons
+        </StyledButton>
+
         {persons}
       </div>
     );
