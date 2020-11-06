@@ -10,16 +10,21 @@ class Persons extends Component {
   // }
 
   shouldComponentUpdate(nextPros, nextState) {
-    console.log(nextPros)
-    console.log(nextState)
-    console.log('[Persons.js] shouldComponentUpdate');
-    return true;
+    // console.log(nextPros)
+    // console.log(nextState)
+    // console.log('[Persons.js] shouldComponentUpdate', true);
+    if(nextPros.persons !== this.persons) {
+      console.log('[Persons.js] shouldComponentUpdate', true);
+      return true;
+    }else {
+      console.log('[Persons.js] shouldComponentUpdate', false);
+    }
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate');
-    console.log(prevProps);
-    console.log(prevState);
+    // console.log(prevProps);
+    // console.log(prevState);
     return null;
   }
 
