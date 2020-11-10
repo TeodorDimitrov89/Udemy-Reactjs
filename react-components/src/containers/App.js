@@ -5,6 +5,9 @@ import CockPit from '../components/Cockpit/Cockpit';
 // import WithClass from '../hoc/WithClass';
 import withClass from '../hoc/withClass';
 import Aux from '../hoc/Auxiliary';
+
+import AuthContext from '../context/auth-context';
+
 class App extends Component {
   state = {
     persons: [
@@ -95,24 +98,24 @@ class App extends Component {
           <Persons 
             persons = {this.state.persons}
             changed={this.nameChangeHandler}
-            clicked={this.deletePersonHandler}
-            isAuthenticated={this.state.authenticated} />
+            clicked={this.deletePersonHandler}/>
       );
     }
 
     return (
       <Aux classes={classes.App}>
-        <button onClick={()=> {this.setState({showCockpit: false})}}>Remove Cockpit</button>
-        {
-          this.state.showCockpit ?
-          <CockPit
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonsHandler}
-          login={this.loginHandler}
-          />: null
-        }
-        {persons}
+        <AuthContext.Provider value={{authenticated: this.state.authenticated,login:this.loginHandler}}>
+          <button onClick={()=> {this.setState({showCockpit: false})}}>Remove Cockpit</button>
+          {
+            this.state.showCockpit ?
+            <CockPit
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonsHandler}
+            />: null
+          }
+          {persons}
+        </AuthContext.Provider>
       </Aux>
     );
   }
