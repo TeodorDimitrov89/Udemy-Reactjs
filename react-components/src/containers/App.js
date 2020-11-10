@@ -24,7 +24,15 @@ class App extends Component {
     ],
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
+  }
+
+  loginHandler = () => {
+    const isAuthenticated = !this.state.authenticated;
+    this.setState({
+      authenticated: isAuthenticated
+    })
   }
 
   switchNameHandler = () => {
@@ -87,7 +95,8 @@ class App extends Component {
           <Persons 
             persons = {this.state.persons}
             changed={this.nameChangeHandler}
-            clicked={this.deletePersonHandler} />
+            clicked={this.deletePersonHandler}
+            isAuthenticated={this.state.authenticated} />
       );
     }
 
@@ -99,7 +108,9 @@ class App extends Component {
           <CockPit
           showPersons={this.state.showPersons}
           personsLength={this.state.persons.length}
-          clicked={this.togglePersonsHandler}/>: null
+          clicked={this.togglePersonsHandler}
+          login={this.loginHandler}
+          />: null
         }
         {persons}
       </Aux>
