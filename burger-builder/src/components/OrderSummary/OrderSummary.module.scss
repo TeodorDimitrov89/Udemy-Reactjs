@@ -1,0 +1,19 @@
+.OrderSummaryList {
+  ol {
+    li {
+      font-size: 18px;
+      &:not(:last-of-type) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  strong {
+    font-size: 21px;
+  }
+ 
+}
+
+.Buttons {
+  display: flex;
+  justify-content: flex-end;
+}
