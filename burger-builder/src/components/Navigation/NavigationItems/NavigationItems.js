@@ -3,16 +3,11 @@ import NavigationItem from './NavigationItem/NavigationItem';
 import classes from './NavigationItems.module.scss';
 const navigationItems = (props) => (
   <ul className={classes.NavigationItems}>
-    <NavigationItem link='/' active>
+    <NavigationItem link='/' exact>
       Burger Builder
     </NavigationItem>
-    <NavigationItem link='/' >
-      Checkout
-      {/* <ul>
-        <NavigationItem link='/' nested>
-          Nested Link
-        </NavigationItem> 
-      </ul> */}
+    <NavigationItem link='/orders' >
+      My orders
     </NavigationItem>
   </ul>
 );
