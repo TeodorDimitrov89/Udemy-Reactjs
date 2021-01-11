@@ -15,7 +15,12 @@ class Orders extends Component {
   render() {
     let orders = this.props.orders.map(order => {
       return (
-        <Order key={order.id} price={order.price} ingredients = {order.ingredients} />
+        <Order 
+          key={order.id}
+          price={order.price}
+          ingredients = {order.ingredients}
+          deleteOrder={() => this.props.onDeleteOrder(order.id)}
+        />
       )
     })
     if(this.props.loading) {
@@ -38,7 +43,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchOrders: () => {dispatch(actionTypes.fetchOrders())}
+    onFetchOrders: () => {dispatch(actionTypes.fetchOrders())},
+    onDeleteOrder: (orderId) => {dispatch(actionTypes.deleteOrder(orderId))}
   }
 }
 

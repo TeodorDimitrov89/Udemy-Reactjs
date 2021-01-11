@@ -1,6 +1,5 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
-import order from '../../components/UI/Order/Order';
 
 const purchaseBurgerSuccess = (id, orderData) => {
   return {
@@ -53,6 +52,7 @@ export const fetchOrdersSuccess = (orders) => {
     orders: orders
   }
 }
+
 export const fetchOrdersFail = (error) => {
   return {
     type: actionTypes.FETCH_ORDERS_FAIL,
@@ -65,8 +65,6 @@ export const fetchOrdersStart = () => {
     type: actionTypes.FETCH_ORDERS_START,
   }
 }
-
-
 
 export const fetchOrders = () => {
   return dispatch => {
@@ -84,6 +82,41 @@ export const fetchOrders = () => {
     })
     .catch((error) => {
       dispatch(fetchOrdersFail(error));
+    });
+  }
+}
+
+
+export const deleteOrderStart = () => {
+  return {
+      type: actionTypes.DELETE_ORDER_START
+  }
+}
+
+
+export const deleteOrderSuccess = (orderId) => {
+  return {
+    type: actionTypes.DELETE_ORDER_SUCCESS,
+    orderId: orderId 
+  }
+}
+
+export const deleteOrderFail = () => {
+  return {
+    type: actionTypes.DELETE_ORDER_FAIL
+  }
+}
+
+export const deleteOrder = (orderId) => {
+  return dispatch => {
+    dispatch(deleteOrderStart());
+    // dispatch(deleteOrderSuccess(orderId));
+    axios.delete(`/orders/${orderId}.json`)
+    .then(() => {
+      dispatch(deleteOrderSuccess(orderId));
+    })
+    .catch((error) => {
+      dispatch(deleteOrderFail(error));
     });
   }
 }

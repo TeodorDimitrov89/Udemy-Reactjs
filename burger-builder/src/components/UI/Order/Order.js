@@ -22,7 +22,7 @@ const order = (props) => {
     <div className={classes.Order}>
       <p>Ingredients: {ingredientsOutput}</p>
       <p>Price: <strong>{props.price} $</strong></p>
-      <span className={classes.Delete}>X</span>
+      <span onClick={props.deleteOrder} className={classes.Delete}>X</span>
     </div>
   )
 }
