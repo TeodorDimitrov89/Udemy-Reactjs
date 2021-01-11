@@ -1,7 +1,25 @@
 .Order {
+  position: relative;
   width: 75%;
   border: 1px solid #eee;
   box-shadow: 0 2px 3px #ccc;
   padding: 10px;
   margin: 10px auto;
+  
+
+  
+}
+
+.Delete {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    cursor: pointer;
+  }
 }

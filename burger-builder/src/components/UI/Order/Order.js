@@ -9,10 +9,6 @@ const order = (props) => {
       name: ing,
       amount: props.ingredients[ing]
     })
-    // let ingredientsMap = new Map();
-    // ingredientsMap.set('name', ing);
-    // ingredientsMap.set('amount', props.ingredients[ing]);
-    // ingredients.push(ingredientsMap)
   }
   const ingredientsOutput = ingredients.map(ingr => {
     return (
@@ -24,9 +20,9 @@ const order = (props) => {
   })
   return (
     <div className={classes.Order}>
-      {/* <p>Ingredients: {props.ingredients.join(', ')}</p> */}
       <p>Ingredients: {ingredientsOutput}</p>
       <p>Price: <strong>{props.price} $</strong></p>
+      <span className={classes.Delete}>X</span>
     </div>
   )
 }
