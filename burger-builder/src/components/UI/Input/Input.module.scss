@@ -26,3 +26,22 @@
   border: 1px solid rgb(209, 32, 32);
   background-color: rgb(228, 76, 76);
 }
+
+
+.Visibility, .VisibilityOff {
+  background-image: url('../../../assets/images/visibility_on.svg');
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  transform: translateY(-50%);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.VisibilityOff {
+  background-image: url('../../../assets/images/visibility_off.svg');
+}
